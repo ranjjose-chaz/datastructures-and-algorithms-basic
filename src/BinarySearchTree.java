@@ -1,5 +1,3 @@
-import jdk.nashorn.api.tree.Tree;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -131,7 +129,7 @@ public class BinarySearchTree {
 
 
 
-    private TreeNode smallest(){
+    private TreeNode smallest_old(){
         TreeNode node = root;
         return _smallest(node);
     }
@@ -220,6 +218,79 @@ public class BinarySearchTree {
     }
 
 
+    public void smallest(){
+        System.out.println(smallest(root));
+    }
+
+    public TreeNode smallest(TreeNode node) {
+        return (node.getLeft() != null)? smallest(node.getLeft()):node;
+
+    }
+
+    public TreeNode getNode(int data){
+        System.out.println("finding node -> "+data);
+        return getNode(root, data);
+    }
+
+    public TreeNode[] getNodeAndParent(int data){
+        System.out.println("finding node -> "+data);
+        return getNodeAndParent(root, data);
+    }
+
+    private TreeNode getNode(TreeNode node, int data) {
+        System.out.print(" -- "+(node == null ? null : node.getData()));
+        if(node == null)
+            return null;
+        else if(data < node.getData())
+            return getNode(node.getLeft(), data);
+        else if (data > node.getData())
+            return getNode(node.getRight(), data);
+        else
+            return node;
+
+
+    }
+
+    private TreeNode[] getNodeAndParent(TreeNode node, int data) {
+        if(node == null)
+            return null;
+        else if(data < node.getData()) {
+            TreeNode[] tmp = getNodeAndParent(node.getLeft(), data);
+            if(tmp!= null && tmp[0] == null)
+                return new TreeNode[] {node, tmp[1]};
+            return tmp;
+        }
+        else if (data > node.getData()) {
+            TreeNode[] tmp = getNodeAndParent(node.getRight(), data);
+            if(tmp!= null && tmp[0] == null)
+                return new TreeNode[] {node, tmp[1]};
+            return tmp;
+
+        } else
+            return new TreeNode[] {null, node};
+
+    }
+
+    public TreeNode getParent(int data){
+        System.out.println("Parent of -> " + data);
+        return getParent(root, data, null);
+
+    }
+
+    public TreeNode getParent(TreeNode node, int data, TreeNode parent) {
+        if(node == null)
+            return null;
+        else if(data < node.getData()){
+            return getParent(node.getLeft(), data, node);
+        } else if(data > node.getData()){
+            return getParent(node.getRight(), data, node);
+        } else {
+            return parent;
+        }
+
+    }
+
+
     public static void main(String[] args){
 
         BinarySearchTree tree = new BinarySearchTree(50);
@@ -291,15 +362,55 @@ public class BinarySearchTree {
         System.out.println("\n\tLargest Left Child\n");
         System.out.println(tree.largestLeftChild(tree.root));
 
-        tree.delete(50);
+        System.out.println("\nSmallest Element");
+        tree.smallest();
+
+        /*System.out.println("\n"+tree.getNode(50));
+        System.out.println("\n"+tree.getNode(8));
+        System.out.println("\n"+tree.getNode(3));
+        System.out.println("\n"+tree.getNode(49));
+        System.out.println("\n"+tree.getNode(100));
+        System.out.println("\n"+tree.getNode(78));
+        System.out.println("\n"+tree.getNode(101));*/
+
+        /*printNodeAndParent(tree.getNodeAndParent(50));
+        printNodeAndParent(tree.getNodeAndParent(8));
+        printNodeAndParent(tree.getNodeAndParent(3));
+        printNodeAndParent(tree.getNodeAndParent(49));
+        printNodeAndParent(tree.getNodeAndParent(100));
+        printNodeAndParent(tree.getNodeAndParent(78));
+        printNodeAndParent(tree.getNodeAndParent(101));
+        */
+
+
+        System.out.println(tree.getParent(50));
+        System.out.println(tree.getParent(8));
+        System.out.println(tree.getParent(3));
+        System.out.println(tree.getParent(49));
+        System.out.println(tree.getParent(100));
+        System.out.println(tree.getParent(78));
+        System.out.println(tree.getParent(101));
+
+
+        /*tree.delete(50);
         System.out.println("\n");
         tree.breadthFirstSearch();
 
         System.out.println("\n\nIn order");
-        tree.inorder(root);
+        tree.inorder(root);*/
 
 
 
+
+
+    }
+
+    private static void printNodeAndParent(TreeNode[] nodeAndParent) {
+        if(nodeAndParent == null)
+            System.out.println("No such node");
+        else {
+            System.out.println(nodeAndParent[0] + " -> "+nodeAndParent[1]);
+        }
     }
 
     private void delete(int data){
@@ -444,8 +555,8 @@ class TreeNode {
 
     @Override
     public String toString() {
-        return "TreeNode{" +
-                "data=" + data +
+        return /*"TreeNode" +*/
+                "{data=" + data +
                 //", left=" + left +
                 //", right=" + right +
                 '}';
