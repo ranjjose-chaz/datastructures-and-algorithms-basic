@@ -44,6 +44,7 @@ public class BinaryHeap {
     }
 
     public void remove(){
+        System.out.println("Removing -> "+arr[0]);
         if(size == 0)
             System.out.println("Array Empty");
         else {
@@ -75,7 +76,7 @@ public class BinaryHeap {
             return;
         }
 
-        int largerChildIndex = (rightChildIndex >= CAPACITY) ? leftChildIndex : arr[leftChildIndex] > arr[rightChildIndex] ? leftChildIndex : rightChildIndex;
+        int largerChildIndex = (rightChildIndex == -1) ? leftChildIndex : arr[leftChildIndex] > arr[rightChildIndex] ? leftChildIndex : rightChildIndex;
         swap(index, largerChildIndex);
 
         heapifyDown(largerChildIndex);
@@ -102,6 +103,10 @@ public class BinaryHeap {
 
         System.out.println(binaryHeap);
 
+        binaryHeap.remove();
+        System.out.println(binaryHeap);
+        binaryHeap.remove();
+        System.out.println(binaryHeap);
         binaryHeap.remove();
         System.out.println(binaryHeap);
         binaryHeap.remove();
