@@ -100,6 +100,11 @@ public class BinaryHeap {
         binaryHeap.insert(10);
         binaryHeap.insert(40);
         binaryHeap.insert(100);
+        binaryHeap.insert(80);
+        binaryHeap.insert(90);
+        binaryHeap.insert(200);
+        binaryHeap.insert(15);
+
 
         System.out.println(binaryHeap);
 
