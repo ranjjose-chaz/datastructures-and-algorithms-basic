@@ -290,6 +290,22 @@ public class BinarySearchTree {
 
     }
 
+    public void dfs(){
+        dfs(root);
+    }
+
+    public void dfs(TreeNode node){
+        if(node != null) {
+            System.out.print(node.getData() + ", ");
+            if (node.getLeft() != null) {
+                dfs(node.getLeft());
+            } if (node.getRight() != null) {
+                dfs(node.getRight());
+            }
+        }
+
+    }
+
 
     public static void main(String[] args){
 
@@ -309,26 +325,8 @@ public class BinarySearchTree {
         */
 
 
-         tree.insert(25);
-         tree.insert(13);
-         tree.insert(38);
-         tree.insert(40);
-         tree.insert(45);
-         tree.insert(49);
-         tree.insert(78);
-         tree.insert(68);
-         tree.insert(88);
-         tree.insert(100);
-         tree.insert(75);
-         tree.insert(70);
-         tree.insert(69);
-         tree.insert(10);
-         tree.insert(8);
-         tree.insert(5);
-         tree.insert(3);
-         tree.insert(47);
-         tree.insert(46);
-         tree.insert(48);
+         loadBigTree(tree);
+
 
 
          /*
@@ -398,11 +396,43 @@ public class BinarySearchTree {
 
         System.out.println("\n\nIn order");
         tree.inorder(root);*/
+        loadTreeForDFS(tree);
+        System.out.println("\nTraversing DFS.. \n");
+        tree.dfs();
 
 
 
 
 
+    }
+
+    private static void loadTreeForDFS(BinarySearchTree tree) {
+        tree.root = new TreeNode(50);
+
+    }
+
+
+    private static void loadBigTree(BinarySearchTree tree) {
+        tree.insert(25);
+        tree.insert(13);
+        tree.insert(38);
+        tree.insert(40);
+        tree.insert(45);
+        tree.insert(49);
+        tree.insert(78);
+        tree.insert(68);
+        tree.insert(88);
+        tree.insert(100);
+        tree.insert(75);
+        tree.insert(70);
+        tree.insert(69);
+        tree.insert(10);
+        tree.insert(8);
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(47);
+        tree.insert(46);
+        tree.insert(48);
     }
 
     private static void printNodeAndParent(TreeNode[] nodeAndParent) {
