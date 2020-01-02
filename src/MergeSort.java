@@ -68,9 +68,4 @@ public class MergeSort {
 
     }
 
-
-    private static void divide(int[] arr, int i, int j){
-        mergeSort(arr, i, j);
-    }
-
 }
