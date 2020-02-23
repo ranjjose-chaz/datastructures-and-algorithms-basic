@@ -21,7 +21,9 @@ public class Fibonacci {
 
     public static int getFibonacci(int index) {
 
-        if(index == 1)
+        if(index == 0)
+            throw new NotImplementedException();
+        else if(index == 1)
             return 0;
         else if(index == 2)
                 return 1;
